@@ -11,7 +11,7 @@ Assign = [[]]
 
 def readFile():
   global Capacity, Assign, Demand, OpenCost, AssignCost, Open
-  fr = open('Instances/p63')
+  fr = open('../Instances/p63')
   firstArr = fr.readline().strip().split()
   fac_num = int(firstArr[0])
   cus_num = int(firstArr[1])

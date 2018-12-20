@@ -13,7 +13,7 @@ Assign = [[]]
 
 def readFile(file_name):
   global Capacity, Assign, Demand, OpenCost, AssignCost, Open
-  fr = open('Instances/' + file_name)
+  fr = open('../Instances/' + file_name)
   firstArr = fr.readline().strip().split()
   fac_num = int(firstArr[0])
   cus_num = int(firstArr[1])
@@ -202,4 +202,4 @@ if __name__ == "__main__":
     dataframe = pd.DataFrame({' ': file_name, 'result': result,'time':times})
 
     #将DataFrame存储为csv,index表示是否显示行名，default=True
-    dataframe.to_csv("result.csv",index=False,sep=',')
+    dataframe.to_csv("CFLP_SA.csv",index=False,sep=',')
