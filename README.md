@@ -1,7 +1,4 @@
 ﻿
->项目地址：https://github.com/GostBop/CFLP
-
-@[toc]
 # Capacitated Facility Location Problem
 ## 问题描述
 
@@ -14,31 +11,9 @@ Note：
 2. The total demand assigned to a facility must not exceed its capacity.
 
 ## 问题建模：
- Let
- $I$={1,..., $I$}：the set of $facilities$
- $J$={1,..., $J$}：the set of $customers$
- $d_j$：$customer$ $j$ 's $Demand$，$j∈J$
- $V_i$：$facility$ $i$ 's $Capacity$，$i∈I$
- $C_i$：$facility$ $i$ 's $OpeningCost$，$i∈I$
- $A_{ij}$:  $facility$ $i$ 's $AssignmentCost$ for $customer$ $j$，$i∈I$，$j∈J$
+![image](http://github.com/GostBop/CFLP/raw/master/images/1.png)
 
-For every $facility$ $i$，$i∈I$， define the following notations：
-$$y_i = \begin{cases}  
-1 & if.facility.i.is.opened \\
-0 & otherwise
-\end{cases}$$
-
-For every $facility$ $i$，$i∈I$；$customer$ $j$，$j∈J$；
-$$x_{ij} = \begin{cases}  
-1 & if.facility.i.is.assigned.for.customer.j\\
-0 & otherwise
-\end{cases}$$
-
-Then the Capacitated Facility Location Problem may be written：
-$$\sum_{j∈J}d_jx_{ij} \leq V_iy_i，i∈I$$
-$$min\lbrace \sum_{i∈I}c_iy_i+\sum_{i∈I}\sum_{j∈J}A_{ij}x_{ij}\rbrace$$
-$$\sum_{i∈I}x_{ij}=1，j∈J $$
-$$x_{ij}，y_i∈\lbrace0, 1\rbrace，i∈I，j∈J$$
+![image](http://github.com/GostBop/CFLP/raw/master/images/2.png)
 
 ## 贪心算法
 CFLP问题是NP问题，很难设计一种直接求出最优解的算法，但是我们可以用贪心算法来接近最优解。
