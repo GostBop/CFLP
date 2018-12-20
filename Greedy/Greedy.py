@@ -2,6 +2,8 @@
 
 import numpy as np
 import time
+import pandas as pd
+
 Capacity =[]
 Open = []
 OpenCost = []
@@ -9,9 +11,9 @@ Demand = []
 AssignCost = [[]]
 Assign = [[]]
 
-def readFile():
+def readFile(file_name):
   global Capacity, Assign, Demand, OpenCost, AssignCost, Open
-  fr = open('../Instances/p63')
+  fr = open('../Instances/' + file_name)
   firstArr = fr.readline().strip().split()
   fac_num = int(firstArr[0])
   cus_num = int(firstArr[1])
@@ -95,25 +97,52 @@ def capcaityNow(fac):
         cap += Assign[fac][i] * Demand[i]
     return cap
 
-readFile()
+def main(file_name):
+    readFile(file_name)
 
-start = time.time()
-greedy()
-  
-cost = getcost() 
+    start = time.time()
+    greedy()
+    
+    cost = getcost() 
 
-end = time.time()
-print end - start
-print cost
+    end = time.time()
+    t = end - start
+    print cost
 
-cus_fac = [0] * len(Demand)
-for i in range(len(Demand)):
-    for j in range(len(Open)):
-        if Assign[j][i] == 1:
-            cus_fac[i] = j + 1
-            Open[j] = 1
-print Open
-print cus_fac
-#print [num for num in range(50)]
-#for i in range(10):
-    #print capcaityNow(i)
+    cus_fac = [0] * len(Demand)
+    for i in range(len(Demand)):
+        for j in range(len(Open)):
+            if Assign[j][i] == 1:
+                cus_fac[i] = j + 1
+                Open[j] = 1
+    print Open
+    print cus_fac
+
+    f = open('result.txt', 'a')
+    f.write(file_name + '\n')
+    f.write(str(cost) + '\n')
+    for i in range(len(Open)):
+        f.write(str(Open[i]) + ' ')
+    f.write('\n')
+    for i in range(len(cus_fac)):
+        f.write(str(cus_fac[i]) + ' ')
+    f.write('\n\n')
+    f.close()
+    return cost, t
+
+if __name__ == "__main__":
+    file_name = []
+    for i in range(71):
+        file_name.append("p" + str(i + 1))
+    result = []
+    times = []
+    for i in range(71):
+        r, t = main(file_name[i])
+        result.append(r)
+        times.append(t)
+    #print result ,times
+    #字典中的key值即为csv中列名
+    dataframe = pd.DataFrame({'file': file_name, 'result': result,'time':times})
+
+    #将DataFrame存储为csv,index表示是否显示行名，default=True
+    dataframe.to_csv("Greedy.csv",index=False,sep=',')
